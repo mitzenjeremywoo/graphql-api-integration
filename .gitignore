@@ -1,0 +1,6 @@
+HotChocApp/.vscode/
+HotChocApp/bin/
+HotChocApp/obj/
+SimpleOpenApi/bin/
+SimpleOpenApi/obj/Debug/net8.0/SimpleOpenApi.csproj.AssemblyReference.cache
+SimpleOpenApi/obj/

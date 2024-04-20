@@ -1,0 +1,6 @@
+@HotChocApp_HostAddress = http://localhost:5148
+
+GET {{HotChocApp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
