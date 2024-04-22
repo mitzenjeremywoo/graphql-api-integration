@@ -1,12 +1,27 @@
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddHttpClient<TodoReader.TodoService>();
+var weatherForecastClient = "WeatherForecastClient";
+
+// Register your http client factory to the server
+builder.Services.AddHttpClient(weatherForecastClient, ctx => { ctx.BaseAddress = new Uri("http://localhost:5199"); });
+
+// do manual instantiation or your can use AddHttpClient to do this. 
+// using the code generated from NSWAG, i decided to keep this contained in case i re-generate the code in the future.
+builder.Services.AddTransient(ctx =>
+{
+    var clientFactory = ctx.GetRequiredService<IHttpClientFactory>();
+    var httpClient = clientFactory.CreateClient(weatherForecastClient);
+
+    return new TodoReader.TodoService("http://localhost:5199", httpClient);
+});
 
 builder.Services.AddGraphQLServer()
     .AddQueryType<Query>();
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

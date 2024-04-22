@@ -22,12 +22,19 @@ namespace TodoReader
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
     
-        public TodoService(System.Net.Http.HttpClient httpClient)
+        public TodoService(string url, System.Net.Http.HttpClient httpClient)
         {
-            BaseUrl = _baseUrl;
+            BaseUrl = url;
             _httpClient = httpClient;
             _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings);
         }
+
+        // public TodoService(System.Net.Http.HttpClient httpClient)
+        // {
+        //     BaseUrl = _baseUrl;
+        //     _httpClient = httpClient;
+        //     _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings);
+        // }
     
         private Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
         {
